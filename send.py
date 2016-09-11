@@ -1,4 +1,4 @@
-from flask import *
+from flask import Flask, render_template, request
 import socket
 import os
 import netifaces as ni
@@ -6,8 +6,8 @@ import sys
 
 app = Flask(__name__)
 
-@app.route("/")
-def root():
+@app.route("/send")
+def send():
 
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	host = ni.ifaddresses('eno1')[2][0]['addr']
@@ -25,7 +25,7 @@ def root():
 	return "Transfered successfully"
 
 if __name__ == '__main__':
-	if (len(argv) == 1):
+	if (len(sys.argv) == 1):
 		port = 5000
 	else:
 		port = int(sys.argv[1])
