@@ -8,7 +8,6 @@ app = Flask(__name__)
 
 @app.route("/send")
 def send():
-
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	host = ni.ifaddresses('eno1')[2][0]['addr']
 	port = 6790

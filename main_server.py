@@ -19,6 +19,10 @@ def upload_file():
 		return redirect('http://localhost:4999/send')
 		# return render_template('seeding.html')
 
+@app.route("/download")
+def download():
+	return render_template('download.html', database=database)
+
 if __name__ == '__main__':
 	if (len(sys.argv) == 1):
 		port = 5000

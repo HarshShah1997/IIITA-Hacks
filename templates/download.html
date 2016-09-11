@@ -1,0 +1,7 @@
+<html>
+<body>
+{% for ip_addr in database['file'] %}
+	<a href="http://localhost:4998/receive?ip_addr={{ ip_addr }}"><h3>{{ ip_addr }}</h3></a>
+{% endfor %}
+</body>
+</html>

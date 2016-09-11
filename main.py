@@ -8,11 +8,10 @@ app = Flask(__name__)
 def root():
 	return render_template("index.html")
 
-@app.route("/connect", methods=['GET', 'POST'])
+@app.route("/receive", methods=['GET', 'POST'])
 def connect():
-
-	if request.method == 'POST':
-		ip_addr = request.form['ip_addr']
+	if request.method == 'GET':
+		ip_addr = request.args.get('ip_addr')
 		#Sending request on IP
 		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		sock_port = 6790
@@ -29,7 +28,7 @@ def connect():
 
 
 if __name__ == '__main__':
-	if (len(argv) == 1):
+	if (len(sys.argv) == 1):
 		port = 5000
 	else:
 		port = int(sys.argv[1])
