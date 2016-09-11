@@ -8,7 +8,7 @@ app = Flask(__name__)
 def root():
 	return render_template("index.html")
 
-@app.route("/receive", methods=['GET', 'POST'])
+@app.route("/receive", methods=['GET', 'POST'])               #Recieves the IP from where file is to be received
 def connect():
 	print("hello")
 	if request.method == 'POST':

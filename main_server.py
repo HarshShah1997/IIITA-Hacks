@@ -1,3 +1,5 @@
+#Main_Server is the hosted server that contains the files in different client machines and their IPs
+
 from flask import Flask, request, render_template, redirect
 import socket
 import sys
@@ -9,11 +11,11 @@ database = {}
 database['file'] = []
 
 @app.route("/upload")
-def upload():
+def upload():                                           #Renders Upload Template
 	return render_template('upload.html')
 
 @app.route("/uploadfile", methods=['GET', 'POST'])
-def upload_file():
+def upload_file():                                      #Adds IP list to database dictionary
 	if request.method == 'POST':
 		ip_addr = request.form['ip_addr']
 		database['file'].append(ip_addr)
@@ -21,7 +23,7 @@ def upload_file():
 		# return render_template('seeding.html')
 
 @app.route("/download")
-def download():
+def download():                                         #Renders Download Template
 	return render_template('download.html', database=database)
 
 if __name__ == '__main__':

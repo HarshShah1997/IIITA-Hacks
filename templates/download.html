@@ -1,3 +1,4 @@
+<!-- This file fetches the list of IPs along with their files -->
 <html>
 <head>
 	<title>Download Page</title>
@@ -5,6 +6,7 @@
 <body>
 	{% for ip_addr in database['file'] %}
 		<button type="button" id = "file" onclick="request()">{{ ip_addr }}</button>
+		<!-- Upon click, an AJAX call from the hosted server will be sent to the requesting client giving the IP address -->
 		<script type="text/javascript">
 			function request() {
 				var async = new XMLHttpRequest();
