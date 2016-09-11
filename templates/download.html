@@ -1,7 +1,18 @@
 <html>
+<head>
+	<title>Download Page</title>
+</head>
 <body>
-{% for ip_addr in database['file'] %}
-	<a href="http://localhost:4998/receive?ip_addr={{ ip_addr }}"><h3>{{ ip_addr }}</h3></a>
-{% endfor %}
+	{% for ip_addr in database['file'] %}
+		<button type="button" id = "file" onclick="request()">{{ ip_addr }}</button>
+		<script type="text/javascript">
+			function request() {
+				var async = new XMLHttpRequest();
+				async.open("POST", "http://localhost:4998/receive", true);
+				async.setRequestHeader("Content-type", "application/x-www-form-urlencoded");     //for a post request
+				async.send("ip_addr={{ ip_addr }}");
+			}
+		</script>
+	{% endfor %}
 </body>
 </html>

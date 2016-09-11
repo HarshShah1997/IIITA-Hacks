@@ -10,14 +10,17 @@ def root():
 
 @app.route("/receive", methods=['GET', 'POST'])
 def connect():
-	if request.method == 'GET':
-		ip_addr = request.args.get('ip_addr')
+	print("hello")
+	if request.method == 'POST':
+		print("hello")
+		ip_addr = request.form['ip_addr']
+		print(request.form['ip_addr'])
 		#Sending request on IP
 		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		sock_port = 6790
 		sock_host = ip_addr
 		sock.connect((sock_host, sock_port))
-		fp = open("recvtest", "wb")
+		fp = open("Test.pdf", "wb")
 		byte = sock.recv(1024)
 		while (byte):
 			fp.write(byte)

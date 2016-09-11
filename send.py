@@ -14,7 +14,7 @@ def send():
 	sock.bind((host, port))
 	sock.listen(5)
 	conn, addr = sock.accept()
-	fp = open('sendtest', 'rb')
+	fp = open('Beejs.pdf', 'rb')
 	byte = fp.read(1024)
 	while (byte):
 		conn.send(byte)
