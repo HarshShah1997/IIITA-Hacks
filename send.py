@@ -3,11 +3,11 @@ import socket
 import os
 import netifaces as ni
 import sys
+from threading import Thread
 
 app = Flask(__name__)
 
-@app.route("/send")
-def send():
+def waitSocket():
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)                      #Sends File
 	host = ni.ifaddresses('eno1')[2][0]['addr']
 	port = 6790
@@ -21,7 +21,12 @@ def send():
 		byte = fp.read(1024)
 	fp.close()
 	conn.close()
-	return "Transfered successfully"
+
+@app.route("/send")
+def send():
+	socketThread=Thread(target=waitSocket,args=[])
+	socketThread.start()
+	return render_template('wait.html')
 
 if __name__ == '__main__':
 	if (len(sys.argv) == 1):
