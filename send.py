@@ -10,7 +10,6 @@ app = Flask(__name__)
 def root():
 
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	ni.ifaddresses('eno1')
 	host = ni.ifaddresses('eno1')[2][0]['addr']
 	port = 6790
 	sock.bind((host, port))
@@ -26,6 +25,9 @@ def root():
 	return "Transfered successfully"
 
 if __name__ == '__main__':
-	port = int(sys.argv[1])
+	if (len(argv) == 1):
+		port = 5000
+	else:
+		port = int(sys.argv[1])
 	app.run(debug=True, port=port)
 

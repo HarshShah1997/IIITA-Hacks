@@ -19,16 +19,20 @@ def connect():
 		sock_host = ip_addr
 		sock.connect((sock_host, sock_port))
 		fp = open("recvtest", "wb")
-		l = sock.recv(1024)
-		while (l):
-			fp.write(l)
-			l = sock.recv(1024)
+		byte = sock.recv(1024)
+		while (byte):
+			fp.write(byte)
+			byte = sock.recv(1024)
 		fp.close()
 		sock.close()
+		return "Received succesfully"
 
 
 if __name__ == '__main__':
-	port = int(sys.argv[1])
+	if (len(argv) == 1):
+		port = 5000
+	else:
+		port = int(sys.argv[1])
 	app.run(debug=True, port=port)
 
 
