@@ -20,14 +20,14 @@
 	</nav>
 	<div class = "container">		
 	  <div class="row">
-	    <form class="col s12">
+	    <form class="col s12" action="{{ url_for('connect') }}" method="POST">
 	      <div class="row">
 	        <div class="input-field col s6">
-	          <input id="first_name" type="text" class="validate">
-	          <label for="first_name">IP Address</label>
+	          <input name="ip_addr" id="first_name" type="text" class="validate">
+	          <label for="first_name"></label>
 	        </div>
 	        <div class="col s6">
-	          <button class="btn" style = "margin-top:25px;">Submit</button>
+	          <button type="submit" class="btn" style = "margin-top:25px;">Submit</button>
 	        </div>
 	      </div>
 	    </form>
