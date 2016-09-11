@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, redirect
 import socket
 import sys
+import netifaces as ni
 
 app = Flask(__name__)
 
@@ -28,5 +29,6 @@ if __name__ == '__main__':
 		port = 5000
 	else:
 		port = int(argv[1])
-	app.run(debug=True, port=port)
+	host = ni.ifaddresses('eno1')[2][0]['addr']
+	app.run(host=host, debug=True, port=port)
 
