@@ -1,5 +1,6 @@
 from flask import *
 import socket
+import sys
 
 app = Flask(__name__)
 
@@ -9,7 +10,7 @@ def root():
 
 @app.route("/connect", methods=['GET', 'POST'])
 def connect():
-	
+
 	if request.method == 'POST':
 		ip_addr = request.form['ip_addr']
 		#Sending request on IP
@@ -17,7 +18,7 @@ def connect():
 		sock_port = 6790
 		sock_host = ip_addr
 		sock.connect((sock_host, sock_port))
-		fp = open("test", "wb")
+		fp = open("recvtest", "wb")
 		l = sock.recv(1024)
 		while (l):
 			fp.write(l)
@@ -27,6 +28,7 @@ def connect():
 
 
 if __name__ == '__main__':
-	app.run(debug=True)
+	port = int(sys.argv[1])
+	app.run(debug=True, port=port)
 
 
