@@ -8,6 +8,7 @@
     <body>
         <div class="container">
             <h2>Download</h2>
+            <p>Click on IP Address to download file</p>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -18,8 +19,8 @@
                 <tbody>
                     {% for key in database %}
                     <tr>
-                        <td> {{ key }} </td>
-                        <td><button type="button" id = "file" onclick="request()" class="btn btn-info">{{ database[key] }}</button></td>
+                        <td> {{ key[0] }} </td>
+                        <td><button type="button" id = "file" onclick="request()" class="btn btn-info">{{ key[1] }}</button></td>
                         <!-- Upon click, an AJAX call from the hosted server will be sent to the requesting client giving the IP address -->
                         <script type="text/javascript">
                             function request() {
