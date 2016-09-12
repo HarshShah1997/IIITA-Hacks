@@ -18,7 +18,7 @@ def upload_file():                                      #Adds IP list to databas
 	if request.method == 'POST':
 		ip_addr = request.form['ip_addr']
 		file_name = request.form['file_name']
-		database['file_name'] = ip_addr
+		database[file_name] = ip_addr
 		return redirect('http://localhost:4999/send?file_name=' + file_name)
 		# return render_template('seeding.html')
 

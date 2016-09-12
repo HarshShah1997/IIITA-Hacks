@@ -6,6 +6,7 @@
 <body>
 	{% for key in database %}
 		<button type="button" id = "file" onclick="request()">{{ database[key] }}</button>
+		<p> {{ key }} </p>
 		<!-- Upon click, an AJAX call from the hosted server will be sent to the requesting client giving the IP address -->
 		<script type="text/javascript">
 			function request() {
