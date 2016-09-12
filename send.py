@@ -7,24 +7,26 @@ from threading import Thread
 
 app = Flask(__name__)
 
-def waitSocket():
+def waitSocket(file_name):
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)                      #Sends File
 	host = ni.ifaddresses('eno1')[2][0]['addr']
 	port = 6790
 	sock.bind((host, port))
 	sock.listen(5)
-	conn, addr = sock.accept()
-	fp = open('Beejs.pdf', 'rb')
-	byte = fp.read(1024)
-	while (byte):
-		conn.send(byte)
+	while (True):
+		conn, addr = sock.accept()
+		fp = open(file_name, 'rb')
 		byte = fp.read(1024)
-	fp.close()
-	conn.close()
+		while (byte):
+			conn.send(byte)
+			byte = fp.read(1024)
+		fp.close()
+		conn.close()
 
 @app.route("/send")
 def send():
-	socketThread=Thread(target=waitSocket,args=[])
+	file_name = request.args.get('file_name')
+	socketThread=Thread(target=waitSocket,args=[file_name])
 	socketThread.start()
 	return render_template('wait.html')
 

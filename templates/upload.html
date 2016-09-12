@@ -1,7 +1,9 @@
 <html>
 <body>
 <form action="{{ url_for('upload_file') }}" method="POST">
-	<p>IP Address <input type="text" name="ip_addr"> <input type="submit" value="Go"></p>
+	<p>IP Address <input type="text" name="ip_addr"> </p>
+	<p>File <input type="file" name="file_name"> </p>
+	<input type="submit" value="Go">
 </form>
 </body>
 </html>

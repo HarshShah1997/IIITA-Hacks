@@ -4,15 +4,15 @@
 	<title>Download Page</title>
 </head>
 <body>
-	{% for ip_addr in database['file'] %}
-		<button type="button" id = "file" onclick="request()">{{ ip_addr }}</button>
+	{% for key in database %}
+		<button type="button" id = "file" onclick="request()">{{ database[key] }}</button>
 		<!-- Upon click, an AJAX call from the hosted server will be sent to the requesting client giving the IP address -->
 		<script type="text/javascript">
 			function request() {
 				var async = new XMLHttpRequest();
 				async.open("POST", "http://localhost:4998/receive", true);
 				async.setRequestHeader("Content-type", "application/x-www-form-urlencoded");     //for a post request
-				async.send("ip_addr={{ ip_addr }}");
+				async.send("ip_addr={{ database[key] }}");
 			}
 		</script>
 	{% endfor %}

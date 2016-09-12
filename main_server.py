@@ -8,7 +8,6 @@ import netifaces as ni
 app = Flask(__name__)
 
 database = {}
-database['file'] = []
 
 @app.route("/upload")
 def upload():                                           #Renders Upload Template
@@ -18,8 +17,9 @@ def upload():                                           #Renders Upload Template
 def upload_file():                                      #Adds IP list to database dictionary
 	if request.method == 'POST':
 		ip_addr = request.form['ip_addr']
-		database['file'].append(ip_addr)
-		return redirect('http://localhost:4999/send')
+		file_name = request.form['file_name']
+		database['file_name'] = ip_addr
+		return redirect('http://localhost:4999/send?file_name=' + file_name)
 		# return render_template('seeding.html')
 
 @app.route("/download")
@@ -33,4 +33,3 @@ if __name__ == '__main__':
 		port = int(argv[1])
 	host = ni.ifaddresses('eno1')[2][0]['addr']
 	app.run(host=host, debug=True, port=port)
-
