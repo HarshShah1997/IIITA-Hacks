@@ -4,8 +4,10 @@ import os
 import netifaces as ni
 import sys
 from threading import Thread
+import sqlite3
 
 app = Flask(__name__)
+file_name = None
 
 def waitSocket(file_name):
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)                      #Sends File
@@ -25,10 +27,21 @@ def waitSocket(file_name):
 
 @app.route("/send")
 def send():
+	global file_name
 	file_name = request.args.get('file_name')
 	socketThread=Thread(target=waitSocket,args=[file_name])
 	socketThread.start()
 	return render_template('wait.html')
+
+@app.route("/stop")
+def stop():
+	return "Closed successfully"
+	conn = sqlite3.connect('database.db')
+	cur = conn.cursor()
+	cur.execute('DELETE FROM data WHERE filename = ?', file_name)
+	conn.commit()
+	conn.close()
+	
 
 if __name__ == '__main__':
 	if (len(sys.argv) == 1):
