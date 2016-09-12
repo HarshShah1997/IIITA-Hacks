@@ -13,7 +13,7 @@
 				var async = new XMLHttpRequest();
 				async.open("POST", "http://localhost:4998/receive", true);
 				async.setRequestHeader("Content-type", "application/x-www-form-urlencoded");     //for a post request
-				async.send("ip_addr={{ database[key] }}");
+				async.send("ip_addr={{ database[key] }}&file_name={{ key }}");
 			}
 		</script>
 	{% endfor %}

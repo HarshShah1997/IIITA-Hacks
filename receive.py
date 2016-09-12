@@ -11,17 +11,18 @@ def root():
 
 @app.route("/receive", methods=['GET', 'POST'])               #Recieves the IP from where file is to be received
 def connect():
-	print("hello")
+	#print("hello")
 	if request.method == 'POST':
-		print("hello")
+		#print("hello")
 		ip_addr = request.form['ip_addr']
-		print(request.form['ip_addr'])
+		file_name = request.form['file_name']
+		#print(request.form['ip_addr'])
 		#Sending request on IP
 		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		sock_port = 6790
 		sock_host = ip_addr
 		sock.connect((sock_host, sock_port))
-		fp = open("Test.pdf", "wb")
+		fp = open(file_name, "wb")
 		byte = sock.recv(1024)
 		while (byte):
 			fp.write(byte)
